@@ -1,6 +1,68 @@
 ﻿USE [PartMgt]
 GO
-/****** Object:  StoredProcedure [dbo].[AddPartMasterWithPartDetail]    Script Date: 2021-08-12 6:32:57 PM ******/
+/****** Object:  StoredProcedure [dbo].[AddCustomerOrderWorkOrder]    Script Date: 2021-08-17 5:29:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[AddCustomerOrderWorkOrder]  	
+AS
+BEGIN
+       SET NOCOUNT ON;
+
+       BEGIN TRAN
+              BEGIN TRY                     
+					DECLARE @cnt INT = 0; 
+					declare @customerOrderIdVal int = 0;
+					declare @partMasterIdVal int =0;
+
+					WHILE @cnt < 10
+					BEGIN	
+					
+					   SET @cnt = @cnt + 1;
+					   print @cnt;
+					   insert into CustomerOrder
+					   (CustomerId, ProductName, OrderQuantity, ProductDrawing)
+					   values
+					   (@cnt, (SELECT CONCAT('Product - ', @cnt)), @cnt*100, null)
+					   
+					   set @customerOrderIdVal = SCOPE_IDENTITY()
+					   print @customerOrderIdVal;
+					
+					   set @partMasterIdVal = (SELECT foo.PartMasterId FROM (
+								  SELECT
+									ROW_NUMBER() OVER (ORDER BY PartMasterId ASC) AS rownumber,
+									PartMasterId
+								  FROM PartMaster
+								) AS foo
+								WHERE rownumber =@cnt)
+						print @partMasterIdVal
+
+					   insert into WorkOrder
+					   (WorkOrderId,CustomerOrderId,PartMasterId, PartQuantityRequired, BalanceAfterPull)
+					   values
+					   (@cnt,@customerOrderIdVal,@partMasterIdVal,@cnt*100,@cnt*100) 
+
+					   
+					END;
+					COMMIT TRANSACTION
+					PRINT 'Done...';				
+			 END TRY
+		     BEGIN CATCH
+				  -- if error, roll back any chanegs done by any of the sql statements
+				  ROLLBACK TRANSACTION
+				  THROW;
+		     END CATCH
+END
+
+
+-----------------------------------------------------
+
+
+USE [PartMgt]
+GO
+/****** Object:  StoredProcedure [dbo].[AddPartMasterWithPartDetail]    Script Date: 2021-08-17 5:29:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -43,11 +105,12 @@ BEGIN
 		     END CATCH
 END
 
--------------------------------------------------------------
+
+---------------------------------------------------
 
 USE [PartMgt]
 GO
-/****** Object:  StoredProcedure [dbo].[EditOrderMaster]    Script Date: 2021-08-12 6:33:32 PM ******/
+/****** Object:  StoredProcedure [dbo].[EditOrderMaster]    Script Date: 2021-08-17 5:30:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -83,14 +146,11 @@ BEGIN
 		     END CATCH
 END
 
-
-
--------------------------------------------------------------
-
+-------------------------------------------
 
 USE [PartMgt]
 GO
-/****** Object:  StoredProcedure [dbo].[EditPartMasterWithPartDetail]    Script Date: 2021-08-12 6:34:00 PM ******/
+/****** Object:  StoredProcedure [dbo].[EditPartMasterWithPartDetail]    Script Date: 2021-08-17 5:30:43 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -139,185 +199,13 @@ BEGIN
 		     END CATCH
 END
 
--------------------------------------------------------------
 
-USE [PartMgt]
-GO
-/****** Object:  StoredProcedure [dbo].[AddCustomerOrderWorkOrder]    Script Date: 2021-08-14 7:00:50 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-ALTER PROCEDURE [dbo].[AddCustomerOrderWorkOrder]  	
-AS
-BEGIN
-       SET NOCOUNT ON;
-
-       BEGIN TRAN
-              BEGIN TRY                     
-					DECLARE @cnt INT = 0; 
-					declare @customerOrderIdVal int = 0;
-					declare @partMasterIdVal int =0;
-
-					WHILE @cnt < 10
-					BEGIN	
-					
-					   SET @cnt = @cnt + 1;
-					   print @cnt;
-					   insert into CustomerOrder
-					   (CustomerId, ProductName, OrderQuantity, ProductDrawing)
-					   values
-					   (@cnt, (SELECT CONCAT('Product - ', @cnt)), @cnt*100, null)
-					   
-					   set @customerOrderIdVal = SCOPE_IDENTITY()
-					   print @customerOrderIdVal;
-					
-					   set @partMasterIdVal = (SELECT foo.PartMasterId FROM (
-								  SELECT
-									ROW_NUMBER() OVER (ORDER BY PartMasterId ASC) AS rownumber,
-									PartMasterId
-								  FROM PartMaster
-								) AS foo
-								WHERE rownumber =@cnt)
-						print @partMasterIdVal
-
-					   insert into WorkOrder
-					   (CustomerOrderId,PartMasterId, PartQuantityRequired, BalanceAfterPull)
-					   values
-					   (@customerOrderIdVal,@partMasterIdVal,@cnt*100,@cnt*100) 
-
-					   
-					END;
-					COMMIT TRANSACTION
-					PRINT 'Done...';				
-			 END TRY
-		     BEGIN CATCH
-				  -- if error, roll back any chanegs done by any of the sql statements
-				  ROLLBACK TRANSACTION
-				  THROW;
-		     END CATCH
-END
-
----------------------------------------------------------------------
-USE [PartMgt]
-GO
-/****** Object:  StoredProcedure [dbo].[ReceivePartMaster]    Script Date: 2021-08-16 6:41:02 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-ALTER PROCEDURE [dbo].[ReceivePartMaster]  
-	  @OrderMasterId int, 
-	  @PartMasterId int,
-	  @ReceiveQuantity int,
-	  @ReceiveDate date,
-	  @RefCode nvarchar(6),
-	  @retCode int output
-AS
-BEGIN
-       SET NOCOUNT ON;
-
-       BEGIN TRAN
-              BEGIN TRY
-                     -- TR1 add @ReceivePart
-						  insert into ReceivePart
-						  values
-						  -- (@OrderMasterId, @PartMasterId, @ReceiveQuantity, @ReceiveDate)
-						  (36, 13,150,GETDATE())
-
-
-					 -- TR2 change StatusCode to 1 -- Received @OrderMaster
-
-
-						DECLARE @cnt INT = 0; 
-						-- set @cnt= (select count(*) from ReceivePart where OrderMasterId=@OrderMasterId)
-						set @cnt= (select count(*) from ReceivePart where OrderMasterId=36)
-						print @cnt
-						if(@cnt>1)
-							begin
-								-- previously Half_Received
-								-- Received / Half_Received
-								declare @totalReceivedQty int = 0;
-								declare @totalOrderQty int = 0;
-								set @totalReceivedQty = (select sum(ReceiveQuantity) from ReceivePart where OrderMasterId=36)    -- @OrderMasterId)
-								set @totalOrderQty = (select OrderQuantity from OrderMaster where RefCode='SADNPE')
-								PRINT 'total Received Qty : ' + CAST(@totalReceivedQty AS VARCHAR) ;  
-								PRINT 'total Order Qty : ' + CAST(@totalOrderQty AS VARCHAR) ;
-
-								print @totalOrderQty-@totalReceivedQty
-								-- if(@ReceiveQuantity>=(@totalOrderQty-@totalReceivedQty)
-								if(@totalOrderQty<=@totalReceivedQty)
-									begin
-										update OrderMaster
-										set OrderStatus=1 -- Received -- Red Color
-										where RefCode='SADNPE'
-										print 'come here at last...'
-									end
-								else
-									begin
-										update OrderMaster
-										set OrderStatus=3 -- Half_Received -- Blue Color
-										-- where RefCode=@RefCode	
-										where RefCode='SADNPE'
-										print 'come here ...'
-									end	
-								-- update PartMaster
-								-- set Quantity=coalesce("Quantity",0)+@ReceiveQuantity
-								-- set Quantity=coalesce("Quantity",0)+100
-								-- where PartMasterId=@PartMasterId
-								-- where PartMasterId=13
-
-							end
-						else
-							begin
-								-- Received / Half_Received
-								-- if(@ReceiveQuantity>=(select OrderQuantity from OrderMaster where RefCode=@RefCode))
-								if(150>=(select OrderQuantity from OrderMaster where RefCode='SADNPE'))
-									update OrderMaster
-									set OrderStatus=1 -- Received -- Red Color
-									where RefCode='SADNPE'
-								else
-									update OrderMaster
-									set OrderStatus=3 -- Half_Received -- Blue Color
-									where RefCode='SADNPE'		
-							end
-
-										
-                     
-					 -- TR3 change Quantity to Quantity+ReceiveQuantity @PartMaster
-						update PartMaster
-						-- set Quantity=coalesce("Quantity",0)+@ReceiveQuantity
-						set Quantity=coalesce("Quantity",0)+150
-						-- where PartMasterId=@PartMasterId
-						where PartMasterId=13
-						-- update PartMaster
-						-- set Quantity=coalesce("Quantity",0)+@ReceiveQuantity
-						-- where PartMasterId=@PartMasterId
-
-
-				-- if not error, commit the transcation
-				-- COMMIT TRANSACTION
-				-- SET @retCode = 0
-				-- return @retCode
-			 END TRY
-		     BEGIN CATCH
-				  -- if error, roll back any chanegs done by any of the sql statements
-				  ROLLBACK TRANSACTION
-				  THROW;
-				  SET @retCode = -1
-				  return @retCode
-		     END CATCH
-END
-
----------------------------------------------------------------
+---------------------------------------------
 
 
 USE [PartMgt]
 GO
-/****** Object:  StoredProcedure [dbo].[ReceivePartMaster]    Script Date: 2021-08-16 8:21:44 PM ******/
+/****** Object:  StoredProcedure [dbo].[ReceivePartMaster]    Script Date: 2021-08-17 5:31:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -419,6 +307,6 @@ BEGIN
 END
 
 
------------------------------------------------------------------
+-----------------------------------------------
 
 

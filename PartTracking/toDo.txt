@@ -1,0 +1,7 @@
+(toDo1)
+- Receiving
+	- order by (RefCode, ReceiveDate)
+	- include PartName and PartCode column @ index file
+	- search by
+		- PartName / PartCode / RefCode
+

@@ -84,8 +84,9 @@ namespace PartTracking.Mvc.Controllers
                 }
                 return RedirectToAction("Index");
             }
+
             var customerWorkOrders = _unitOfWork.CustomerWorkOrders.GetCustomerWorkOrders();
-            var customerWorkOrder = customerWorkOrders.Where(x => x.WorkOrderId == _customerWorkOrder.WorkOrderId).FirstOrDefault();
+            var customerWorkOrder = customerWorkOrders.Where(x => x.WOId == _customerWorkOrder.WOId).FirstOrDefault();
             return View("PullPartFromWarehouse", customerWorkOrder);
         }
 
