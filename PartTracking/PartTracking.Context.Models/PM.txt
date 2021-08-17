@@ -1,0 +1,3 @@
+﻿Scaffold-DbContext "Server=CHICAAMBICA\SQLExpress;Database=PartMgt;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+Scaffold-DbContext "Server=CHICAAMBICA\SQLExpress;Database=PartMgt;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
