@@ -6,5 +6,12 @@
 		- PartName / PartCode / RefCode - OK
 
 (toDo2)
-- create documentation - WIP
+- create documentation - WIP1
+- create page
+	- select part from selectlist
+		- display all part tracking information like,,,
+			(when part was ordered by warehouse->when part was received by receiving
+				->when production/workorder has pulled part)
+			(part tracking by date, quantity and department(warehouse/receiving/production(workorder)))
 
+			- use partial views for details on date and quantity by department
