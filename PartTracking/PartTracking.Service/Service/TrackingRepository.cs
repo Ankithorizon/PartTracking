@@ -60,7 +60,9 @@ namespace PartTracking.Service.Service
             {
                 data.OrderMasterId = _order.OrderMasterId;
                 data.OrderDate = (DateTime)_order.OrderDate;
-                
+                data.OrderQuantity = (int) _order.OrderQuantity;
+                data.ReceivedQuantity = 0;
+
                 var _receiving = _order.ReceivePart;
                 if(_receiving!=null && _receiving.Count() > 0)
                 {
@@ -72,6 +74,7 @@ namespace PartTracking.Service.Service
                                ReceiveQuantity = _receivingData.ReceiveQuantity,
                                 ReceivePartId = _receivingData.ReceivePartId
                         });
+                        data.ReceivedQuantity += _receivingData.ReceiveQuantity;
                     }                    
                 }
             }

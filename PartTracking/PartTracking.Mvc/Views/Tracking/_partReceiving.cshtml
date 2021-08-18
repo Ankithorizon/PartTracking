@@ -4,11 +4,11 @@
 <style>
     .orderIdData {
         color: red;
-        font-size: xx-large;
+        font-size: x-large;
     }
 
     .orderIdLabel {
-        font-size: xx-large;
+        font-size: x-large;
     }
 </style>
 
@@ -21,14 +21,25 @@
 }
 <p></p>
 
-
 <div>
     <dl class="row">
-        <dt class="col-sm-4 orderIdLabel">
+        <dt class="col-sm-3 orderIdLabel">
             Selected Order #
         </dt>
         <dd class="col-sm-8 orderIdData">
             @Html.DisplayFor(model => model.OrderMasterId)
+        </dd>
+        <dt class="col-sm-3 orderIdLabel">
+            Order QTY
+        </dt>
+        <dd class="col-sm-8 orderIdData">
+            @Html.DisplayFor(model => model.OrderQuantity)
+        </dd>
+        <dt class="col-sm-3 orderIdLabel">
+            Received QTY
+        </dt>
+        <dd class="col-sm-8 orderIdData">
+            @Html.DisplayFor(model => model.ReceivedQuantity)
         </dd>
     </dl>
 
@@ -63,7 +74,7 @@
                                     @item.ReceivePartId
                                 </td>
                                 <td>
-                                    @item.ReceiveQuantity
+                                    @item.ReceiveQuantity / @Model.OrderQuantity
                                 </td>
                                 <td>
                                     @item.ReceiveDate.ToString("dd MMM yyyy")

@@ -11,6 +11,7 @@ namespace PartTracking.Context.Models.DTO
         public DateTime OrderDate { get; set; }
         public int OrderStatus { get; set; }
         public string RefCode { get; set; }
+        public int ReceivedQuantity { get; set; }
         public List<ReceivingTrackingData> ReceivingData { get; set; }
     }
 }
