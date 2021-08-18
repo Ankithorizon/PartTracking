@@ -24,12 +24,13 @@ namespace PartTracking.Service.Service
             data.Orders = new List<OrderTrackingData>();
 
             var part_ = _context.PartMaster.Include(x=>x.OrderMaster).Where(x => x.PartMasterId == partMasterId).FirstOrDefault();
-            data.PartMasterId = part_.PartMasterId;
-            data.Part = part_.PartName + " [ " + part_.PartCode + " ] ";
-            data.Quantity = (int)(part_.Quantity==null ? 0 : part_.Quantity);
-           
+          
             if (part_ != null)
             {
+                data.PartMasterId = part_.PartMasterId;
+                data.Part = part_.PartName + " [ " + part_.PartCode + " ] ";
+                data.Quantity = (int)(part_.Quantity == null ? 0 : part_.Quantity);
+                
                 var orders_ = part_.OrderMaster;
                 if(orders_!=null && orders_.Count() > 0)
                 {
@@ -42,6 +43,34 @@ namespace PartTracking.Service.Service
                               OrderQuantity = (int)order_.OrderQuantity,
                                OrderStatus = (int)order_.OrderStatus,
                                 RefCode = order_.RefCode
+                        });
+                    }                    
+                }
+            }
+            return data;
+        }
+
+        public OrderTrackingData GetPartReceivingData(int orderMasterId)
+        {
+            OrderTrackingData data = new OrderTrackingData();
+            data.ReceivingData = new List<ReceivingTrackingData>();
+
+            var _order = _context.OrderMaster.Include(x=>x.ReceivePart).Where(x => x.OrderMasterId == orderMasterId).FirstOrDefault();
+            if (_order != null)
+            {
+                data.OrderMasterId = _order.OrderMasterId;
+                data.OrderDate = (DateTime)_order.OrderDate;
+                
+                var _receiving = _order.ReceivePart;
+                if(_receiving!=null && _receiving.Count() > 0)
+                {
+                    foreach(var _receivingData in _receiving)
+                    {
+                        data.ReceivingData.Add(new ReceivingTrackingData()
+                        {
+                              ReceiveDate = _receivingData.ReceiveDate,
+                               ReceiveQuantity = _receivingData.ReceiveQuantity,
+                                ReceivePartId = _receivingData.ReceivePartId
                         });
                     }                    
                 }

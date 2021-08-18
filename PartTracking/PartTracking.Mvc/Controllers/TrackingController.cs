@@ -52,5 +52,21 @@ namespace PartTracking.Mvc.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetReceivingDetailsByOrder(int Id)
+        {
+            OrderTrackingData orderTrackingData = new OrderTrackingData();
+            try
+            {
+                orderTrackingData = _unitOfWork.PartTrackingService.GetPartReceivingData(Id);
+                return PartialView("_partReceiving", orderTrackingData);
+            }
+            catch (Exception ex)
+            {
+                TempData["Exception"] = "Exception!";
+                return PartialView("_partReceiving", orderTrackingData);
+            }
+        }
+
     }
 }

@@ -9,5 +9,6 @@ namespace PartTracking.Service.Repository
     public interface ITrackingRepository : IGenericRepository<PartMaster>
     {
         PartTrackingData GetPartOrdersData(int partMasterId);
+        OrderTrackingData GetPartReceivingData(int orderMasterId);
     }
 }

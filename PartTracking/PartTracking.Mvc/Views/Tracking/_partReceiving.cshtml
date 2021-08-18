@@ -1,0 +1,86 @@
+﻿@model PartTracking.Context.Models.DTO.OrderTrackingData
+
+
+<style>
+    .orderIdData {
+        color: red;
+        font-size: xx-large;
+    }
+
+    .orderIdLabel {
+        font-size: xx-large;
+    }
+</style>
+
+<p></p>
+@if (TempData["Exception"] != null)
+{
+    <div class="container response">
+        <h3>Error : @TempData["Exception"]</h3>
+    </div>
+}
+<p></p>
+
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-4 orderIdLabel">
+            Selected Order #
+        </dt>
+        <dd class="col-sm-8 orderIdData">
+            @Html.DisplayFor(model => model.OrderMasterId)
+        </dd>
+    </dl>
+
+
+    <div>
+        <!-- part - order - receiving data -->
+        <div>
+            <h4>Part - Order - Receiving - Data</h4>
+            <hr />
+            @if (Model.ReceivingData.Count() > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Receiving #
+                            </th>
+                            <th>
+                                Receive QTY
+                            </th>
+                            <th>
+                                Receive Date
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ReceivingData)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ReceivePartId
+                                </td>
+                                <td>
+                                    @item.ReceiveQuantity
+                                </td>
+                                <td>
+                                    @item.ReceiveDate.ToString("dd MMM yyyy")
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p></p>
+                <div class="container" style="color:red; font-size:xx-large;">
+                    Receiving Data NOT Found!
+                </div>
+                <p></p>
+            }
+        </div>
+    </div>
+</div>
