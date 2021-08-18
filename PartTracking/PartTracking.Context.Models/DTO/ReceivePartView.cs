@@ -20,5 +20,7 @@ namespace PartTracking.Context.Models.DTO
         [Required(ErrorMessage = "Reference Code is Required!")]
         public string RefCode  { get; set; }
         public int OrderStatus { get; set; }
+
+        public string Part { get; set; }
     }
 }

@@ -45,11 +45,33 @@
 }
 <p></p>
 
-
-
 <p class="tableData">
     <a asp-action="ReceivePart">Receive Part!</a>
 </p>
+
+<p></p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-6" style="font-size:x-large; font-display:block;">
+            <!-- search by part -->
+            <p>
+                @using (@Html.BeginForm("Index", "Receiving", FormMethod.Get))
+                {
+                    @Html.TextBox("SearchString")
+                    <input style="margin-top:-10px;"
+                           type="submit"
+                           class="btn btn-primary"
+                           value="Search Part / RefCode" />
+                }
+            </p>
+            <hr />
+            <p></p>
+        </div>
+    </div>
+</div>
+<p></p>
 
 
 @if (Model.Count() > 0)
@@ -61,22 +83,27 @@
                     Receive #
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ReceiveQuantity)
+                    Part
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderQuantity)
+                    R-QTY
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ReceiveDate)
+                    O-QTY
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderDate)
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["ReceiveDateSortParm"]">R-Date</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderStatus)
+                    O-Date
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.RefCode)
+                    O-Status
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["RefCodeSortParm"]">#REF#</a>
                 </th>
                 <th></th>
             </tr>
@@ -88,6 +115,19 @@
                     <td>
                         @item.ReceivePartId
                     </td>
+                    @if (item.Part.Length >= 15)
+                    {
+                        <td>
+                            @(item.Part.Substring(0,15)+"...")
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.Part
+                        </td>
+                    }
+
                     <td>
                         @item.ReceiveQuantity
                     </td>
@@ -119,7 +159,7 @@
                         {
                             // Received
                             <td style="color:red; font-size:large;">
-                                @orderStatus                                
+                                @orderStatus
                                 <br />
                                 @item.ReceiveQuantity / @item.OrderQuantity
                             </td>

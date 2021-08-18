@@ -27,9 +27,53 @@ namespace PartTracking.Mvc.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
-            var receivedOrders = _unitOfWork.ReceiveParts.GetReceivePartHistory();
+            ViewData["RefCodeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "refcode_desc" : "";
+            ViewData["ReceiveDateSortParm"] = sortOrder == "Date" ? "receivedate_desc" : "Date";
+            
+            var receivedOrders = _unitOfWork.ReceiveParts.GetReceivePartHistory().OrderBy(x=>x.ReceivePartId);
+
+
+            // search 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var receivedOrdersSearched = receivedOrders
+                                    .Where(x => x.RefCode.ToLower().Contains(searchString.ToLower()) || x.Part.ToLower().Contains(searchString.ToLower())).ToList();
+                // order by
+                switch (sortOrder)
+                {
+                    case "refcode_desc":
+                        receivedOrders = receivedOrdersSearched.OrderByDescending(s => s.RefCode);
+                        break;
+                    case "Date":
+                        receivedOrders = receivedOrdersSearched.OrderBy(s => s.ReceiveDate);
+                        break;
+                    case "receivedate_desc":
+                        receivedOrders = receivedOrdersSearched.OrderByDescending(s => s.ReceiveDate);
+                        break;
+                    default:
+                        receivedOrders = receivedOrdersSearched.OrderBy(s => s.RefCode);
+                        break;
+                }
+                return View(receivedOrders);
+            }
+            // order by
+            switch (sortOrder)
+            {
+                case "refcode_desc":
+                    receivedOrders = receivedOrders.OrderByDescending(s => s.RefCode);
+                    break;
+                case "Date":
+                    receivedOrders = receivedOrders.OrderBy(s => s.ReceiveDate);
+                    break;
+                case "receivedate_desc":
+                    receivedOrders = receivedOrders.OrderByDescending(s => s.ReceiveDate);
+                    break;
+                default:
+                    receivedOrders = receivedOrders.OrderBy(s => s.RefCode);
+                    break;
+            }
             return View(receivedOrders);
         }
 

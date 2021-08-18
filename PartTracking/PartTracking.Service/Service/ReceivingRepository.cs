@@ -37,7 +37,8 @@ namespace PartTracking.Service.Service
                               ReceiveDate = _receivedPart.ReceiveDate,
                                ReceivePartId = _receivedPart.ReceivePartId,
                                 ReceiveQuantity = _receivedPart.ReceiveQuantity,
-                                 RefCode = _receivedPart.OrderMaster.RefCode
+                                 RefCode = _receivedPart.OrderMaster.RefCode,
+                                 Part = _receivedPart.PartMaster.PartName + " ["+ _receivedPart.PartMaster.PartCode+" ]"
                        
                     });
                 }

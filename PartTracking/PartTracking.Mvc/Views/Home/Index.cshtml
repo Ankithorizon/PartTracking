@@ -5,20 +5,39 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h1>This is Part Management Service - Home</h1>
+        <h1>Part Tracking Service - Home</h1>
     </div>
     <h3>
         <ul>
-            <li>Manage Inflow and Outflow for Parts</li>
+            <li>Engineering Department can Create/Edit/View/Search (New) Part</li>
             <br />
-            <li>Warehouse can generate request for Parts to Receiving</li>
+            <li>Warehouse can Create Order(Generate Request) for Parts
+                <ul>
+                    <li>Edit - Order (Confirmed)</li>
+                    <li>View - Order (Confirmed/Received_WIP/Received)</li>
+                    <li>Search - Order (Confirmed/Received_WIP/Received)</li>
+                </ul>
+            </li>
             <br />
-            <li>Warehouse can redirect Parts to Production-WorkOrder</li>
+            <li>
+                Receiving can
+                <ul>
+                    <li>Receive Parts in Complete Quantity or in Installment Quantity</li>
+                    <li>View - Receiving Details - Warehouse Order Details - Part Details
+                        for,,, Received_WIP/Received - Orders</li>
+                    <li>Search - Order (Received_WIP/Received)</li>
+                </ul>
+            </li>
             <br />
-            <li>Warehouse can redirect Parts to Assembly Department</li>
+            <li>Production&gt;WorkOrder
+                <ul>
+                    <li>Can Not Pull More Than Parts Required For WorkOrder#</li>
+                    <li>Can Not Pull If 0 Parts Available at Warehouse</li>
+                    <li>Can Pull Parts in Complete Quantity or in Installment Quantity</li>
+                    <li>Search - WorkOrder</li>
+                </ul>
+            </li>
             <br />
-            <li>Receiving can receive Parts for Warehouse Orders</li>
-            <br />            
         </ul>
     </h3>
 </div>
