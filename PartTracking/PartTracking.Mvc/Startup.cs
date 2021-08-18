@@ -37,6 +37,7 @@ namespace PartTracking.Mvc
             services.AddTransient<IPartDetailRepository, PartDetailRepository>();
             services.AddTransient<IReceivingRepository, ReceivingRepository>();
             services.AddTransient<ICustomerWorkOrderRepository, CustomerWorkOrderRepository>();
+            services.AddTransient<ITrackingRepository, TrackingRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             #endregion
 

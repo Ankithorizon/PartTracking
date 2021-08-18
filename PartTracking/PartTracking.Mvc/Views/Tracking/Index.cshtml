@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Tracking - Part";
+}
+
+<style>
+    .header {
+        justify-content: center;
+        align-items: center;
+        border: 5px solid red;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 5px;
+        font-size: x-large;
+        text-align: center;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6 header">
+        Tracking - Part
+    </div>
+    <div class="col-sm-3">
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+
+            <form asp-action="GetWarehouseOrdersByPart" 
+                  asp-controller="Tracking" 
+                  method="get">
+                <div class="form-group">
+                    <label class="control-label">Select Part #</label>
+                    <select id="PartMasterId" name="PartMasterId" class="form-control"
+                            asp-items="(IEnumerable<SelectListItem>)ViewBag.Parts">
+                        <option value="">Pick one</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-primary details"
+                       href="javascript:void(0)">Track Me!</a>
+                </div>
+            </form>
+    </div>
+</div>
+
+<!-- part-orders partial view -->
+<div id="partOrders">  
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+            $(".details").click(function () {
+
+                // var partMasterId = $("#PartMasterId option:selected").text();
+                // var partMasterId = $("#PartMasterId option:selected").val();
+                // console.log(partMasterId);
+
+                var obj = {};
+                obj.Id = $("#PartMasterId option:selected").val();
+                // console.log(obj.Id);
+
+                if (obj.Id == '') {
+                    $('#partOrders').html('');
+                    return;
+                }
+                    
+
+                $.ajax({
+                    type: "Get", //Method type
+                    url: "/Tracking/GetWarehouseOrdersByPart?Id=" + obj.Id, //url to load partial view
+                    data: JSON.stringify(obj.Id),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "html",
+                    success: function (response) {
+                        console.log(response);
+                        $('#partOrders').html(response);
+                    },
+                    failure: function (response) {
+                        
+                    },
+                    error: function (response) {
+                        
+                    }
+                });
+            });
+        });
+
+
+
+
+
+        // disappear after 3 seconds,,,
+        setTimeout(function () { $('.response').fadeOut(); }, 3000);
+
+        // after Part add, browser back history doesn't work,,,
+        // this will prevent form resubmission,,,
+        function DisableBackButton() {
+            window.history.forward()
+        }
+        DisableBackButton();
+        window.onload = DisableBackButton;
+        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+        window.onunload = function () { void (0) }
+
+    </script>
+}

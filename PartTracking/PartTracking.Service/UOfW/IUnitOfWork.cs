@@ -12,6 +12,7 @@ namespace PartTracking.Service.UOfW
         IPartDetailRepository PartDetails { get; }
         IReceivingRepository ReceiveParts { get; }
         ICustomerWorkOrderRepository CustomerWorkOrders { get; }
+        ITrackingRepository PartTrackingService { get; }
         int Complete();
     }
 }
