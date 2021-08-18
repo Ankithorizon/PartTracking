@@ -9,15 +9,6 @@ namespace PartTracking.Context.Models.DTO
         public int PartMasterId { get; set; }
         public string Part { get; set; }
         public int Quantity { get; set; }
-        public List<PartOrders> Orders { get; set; }
-    }
-
-    public class PartOrders
-    {
-        public int OrderMasterId { get; set; }
-        public int OrderQuantity { get; set; }
-        public DateTime OrderDate { get; set; }
-        public int OrderStatus { get; set; }
-        public string RefCode { get; set; }
+        public List<OrderTrackingData> Orders { get; set; }
     }
 }

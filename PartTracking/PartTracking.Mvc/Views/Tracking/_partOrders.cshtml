@@ -100,6 +100,11 @@
                         <td>
                             @item.RefCode
                         </td>
+                        <td>
+                            <a class="btn btn-primary receivingDetails"
+                               data-id="@item.OrderMasterId"
+                               href="javascript:void(0)">Track Receiving!</a>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -115,3 +120,35 @@
     }
 </div>
 
+<!-- part-orders partial view -->
+<div id="partReceiving">
+</div>
+
+
+<script type="text/javascript">
+
+    $(".receivingDetails").click(function () {
+
+        var obj = {};
+        obj.Id = $(this).attr('data-id');
+
+        $.ajax({
+            type: "Get", //Method type
+            url: "/Tracking/GetReceivingDetailsByOrder?Id=" + obj.Id, //url to load partial view
+            data: JSON.stringify(obj.Id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                console.log(response);
+                $('#partReceiving').html(response);
+            },
+            failure: function (response) {
+
+            },
+            error: function (response) {
+
+            }
+        });
+    });
+
+</script>

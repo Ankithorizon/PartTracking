@@ -15,3 +15,27 @@
 			(part tracking by date, quantity and department(warehouse/receiving/production(workorder)))
 
 			- use partial views for details on date and quantity by department
+
+
+system process>
+-> { engineering - part create/edit/view}
+	-> { warehouse - order (refcode)}
+		 - [ create order with (status confirmed) and generates (refcode) for future receiving part]
+		 -> { receiving part (refcode)}
+			 - [ update order (status from confirmed to 
+					received_wip(if received by installment quantity) /
+					received(if received by fully quantity)]
+			 - [ update quantity @warehouse-part ]
+			 - [ receiving - part keeps track by receiving-quantity and receiving-date 
+				with reference to (refcode)  ]
+
+		 -> { production - workorder}
+			 - [ workorder connects with more than 1 part]
+			 - [ workorder can not pull parts more than required quantity]
+			 - [ workorder can pull parts from warehouse by fully quantity or by installment quantity]
+			 - [ workorder - pull parts update quantity @warehouse-part]
+			 - [ workorder - pull parts keeps track by pull-quantity and pull-date ]
+
+
+
+

@@ -21,7 +21,7 @@ namespace PartTracking.Service.Service
         public PartTrackingData GetPartOrdersData(int partMasterId)
         {
             PartTrackingData data = new PartTrackingData();
-            data.Orders = new List<PartOrders>();
+            data.Orders = new List<OrderTrackingData>();
 
             var part_ = _context.PartMaster.Include(x=>x.OrderMaster).Where(x => x.PartMasterId == partMasterId).FirstOrDefault();
             data.PartMasterId = part_.PartMasterId;
@@ -35,7 +35,7 @@ namespace PartTracking.Service.Service
                 {
                     foreach(var order_ in orders_)
                     {
-                        data.Orders.Add(new PartOrders()
+                        data.Orders.Add(new OrderTrackingData()
                         {
                             OrderDate = (DateTime)order_.OrderDate,
                              OrderMasterId = order_.OrderMasterId,
