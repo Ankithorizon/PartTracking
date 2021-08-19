@@ -42,8 +42,11 @@ namespace PartTracking.Mvc.Controllers
         public IActionResult GetWarehouseOrdersByPart(int Id, string year, string month)
         {
             PartTrackingData partTrackingData = new PartTrackingData();
+            partTrackingData.Orders = new List<OrderTrackingData>();
             try
             {
+                // throw new Exception();
+
                 partTrackingData = _unitOfWork.PartTrackingService.GetPartOrdersData(Id, year,month);
                 return PartialView("_partOrders", partTrackingData);
             }

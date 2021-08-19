@@ -13,6 +13,10 @@
         font-size: x-large;
         text-align: center;
     }
+
+    .response {
+        color: red;
+    }
 </style>
 
 <div class="row">
@@ -28,7 +32,6 @@
 
 <div class="row">
     <div class="col-md-6">
-
         <form>
             <div class="form-group">
                 <label class="control-label">Select Part #</label>
@@ -63,7 +66,6 @@
 <div id="partOrders">
 </div>
 
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
@@ -75,9 +77,9 @@
     <script type="text/javascript">
         $(function () {
             $(".orderDetails").click(function () {
-                var obj = {};
-                obj.Id = $("#PartMasterId option:selected").val();
-                if (obj.Id == '') {
+
+                var Id = $("#PartMasterId option:selected").val();
+                if (Id == '') {
                     $('#partOrders').html('');
                     return;
                 }
@@ -87,8 +89,7 @@
 
                 $.ajax({
                     type: "Get", //Method type
-                    url: "/Tracking/GetWarehouseOrdersByPart?Id=" + obj.Id + "&Year=" + year + "&Month=" + month, //url to load partial view
-                    data: JSON.stringify(obj.Id),
+                    url: "/Tracking/GetWarehouseOrdersByPart?Id=" + Id + "&Year=" + year + "&Month=" + month,
                     contentType: "application/json; charset=utf-8",
                     dataType: "html",
                     success: function (response) {
@@ -96,10 +97,10 @@
                         $('#partOrders').html(response);
                     },
                     failure: function (response) {
-
+                        console.log('Error...');
                     },
                     error: function (response) {
-
+                        console.log('Error...');
                     }
                 });
             });

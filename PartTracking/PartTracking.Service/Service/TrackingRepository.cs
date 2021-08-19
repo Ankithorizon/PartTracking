@@ -26,6 +26,10 @@ namespace PartTracking.Service.Service
             PartTrackingData data = new PartTrackingData();
             data.Orders = new List<OrderTrackingData>();
 
+            // if year=="", select current year
+            if (year == null)
+                year = DateTime.Now.Year + "";
+          
             var part_ = _context.PartMaster.Include(x=>x.OrderMaster)
                     .Where(x => x.PartMasterId == partMasterId).FirstOrDefault();
           
@@ -35,9 +39,19 @@ namespace PartTracking.Service.Service
                 data.Part = part_.PartName + " [ " + part_.PartCode + " ] ";
                 data.Quantity = (int)(part_.Quantity == null ? 0 : part_.Quantity);
 
-                // var orders_ = part_.OrderMaster;
-                var orders_ = part_.OrderMaster
-                                    .Where(x => x.OrderDate.Year == Int32.Parse(year) && x.OrderDate.Month == Int32.Parse(month));
+                var orders_ = new List<OrderMaster>();
+                // if month=="", select all months of selected or current year
+                if (month == null)
+                {
+                    orders_ = part_.OrderMaster
+                                   .Where(x => x.OrderDate.Year == Int32.Parse(year)).ToList();
+                }
+                else
+                {
+                    orders_ = part_.OrderMaster
+                                   .Where(x => x.OrderDate.Year == Int32.Parse(year) && x.OrderDate.Month == Int32.Parse(month)).ToList();
+                }
+               
                 if (orders_!=null && orders_.Count() > 0)
                 {
                     foreach(var order_ in orders_)
