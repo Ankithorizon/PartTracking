@@ -37,6 +37,7 @@
           "Microsoft.jQuery.Unobtrusive.Ajax": "3.2.6",
           "PartTracking.Context.Models": "1.0.0",
           "PartTracking.Service": "1.0.0",
+          "jQuery.UI.Combined": "1.12.1",
           "Microsoft.AspNetCore.Antiforgery.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -327,7 +328,12 @@
           "PartTracking.Mvc.dll": {}
         }
       },
-      "jQuery/1.8.0": {},
+      "jQuery/1.12.4": {},
+      "jQuery.UI.Combined/1.12.1": {
+        "dependencies": {
+          "jQuery": "1.12.4"
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.DataProtection": "2.2.0",
@@ -1060,7 +1066,7 @@
       },
       "Microsoft.jQuery.Unobtrusive.Ajax/3.2.6": {
         "dependencies": {
-          "jQuery": "1.8.0"
+          "jQuery": "1.12.4"
         }
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
@@ -4041,12 +4047,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "jQuery/1.8.0": {
+    "jQuery/1.12.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-laDFQRJrIRHT0Z0GVYklMt3bE0iu0MZFJwHwg21kt3SHb7Bj8TdNiM3K+ZdK1DzB8ZxKy8z7NkJvwMas+dmHBw==",
-      "path": "jquery/1.8.0",
-      "hashPath": "jquery.1.8.0.nupkg.sha512"
+      "sha512": "sha512-pIYtWlFI5PGlJVB8jm9H96pAQ27jQhA9sCxMeGweeC3ByQRaB8BwkIuGdTt4go3IEKTmmfRC2y5k0FLFizWDQg==",
+      "path": "jquery/1.12.4",
+      "hashPath": "jquery.1.12.4.nupkg.sha512"
+    },
+    "jQuery.UI.Combined/1.12.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5B0LrPZ0TLlwplPRu43h7fgMtDxMMEF31HajUqHSOJ7bC6nyJUJy7AkcuGaJdBrrZAZutnSBgXT01BGiIIC4TQ==",
+      "path": "jquery.ui.combined/1.12.1",
+      "hashPath": "jquery.ui.combined.1.12.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "type": "package",

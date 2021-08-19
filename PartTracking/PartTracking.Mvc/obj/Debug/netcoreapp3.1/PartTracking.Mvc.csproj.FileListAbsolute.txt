@@ -64,7 +64,6 @@ C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\bin\Debug\netcoreapp
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\bin\Debug\netcoreapp3.1\PartTracking.Service.dll
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\bin\Debug\netcoreapp3.1\PartTracking.Context.Models.pdb
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\bin\Debug\netcoreapp3.1\PartTracking.Service.pdb
-C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\PartTracking.Mvc.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Engineering\CreatePart.cshtml.g.cs
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Engineering\Index.cshtml.g.cs
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Engineering\PartDetails.cshtml.g.cs
@@ -155,3 +154,4 @@ C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\bin\Debug\netcoreapp
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Tracking\Index.cshtml.g.cs
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Tracking\_partOrders.cshtml.g.cs
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Tracking\_partReceiving.cshtml.g.cs
+C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\PartTracking.Mvc.MvcApplicationPartsAssemblyInfo.cs

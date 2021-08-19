@@ -15,7 +15,8 @@ namespace PartTracking.Context.Models.Models
         public int OrderMasterId { get; set; }
         public int PartMasterId { get; set; }
         public int? OrderQuantity { get; set; }
-        public DateTime? OrderDate { get; set; }
+        // public DateTime? OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public int? OrderStatus { get; set; }
         public string RefCode { get; set; }
 

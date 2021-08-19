@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Xyw15ZR2BPV3s6olLWf8qBUzY6SSXtgRi0E8iynoz7P+VUn/oBuSvIyZnoMXv13JO91W7/NUM8Dz9yypSQ0rzw==",
+  "dgSpecHash": "+qdtCH1/qBaGw0HmzgCSZcZrWAY4keL+P+la6DiJNDZQJLbyvTFmcxPKNv4o4OvAxJ7q04Hkrbcjrud1Z/q+ng==",
   "success": true,
   "projectFilePath": "C:\\Users\\ankit_2\\source\\repos\\PartTracking\\PartTracking.Mvc\\PartTracking.Mvc.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ankit_2\\.nuget\\packages\\jquery\\1.8.0\\jquery.1.8.0.nupkg.sha512",
+    "C:\\Users\\ankit_2\\.nuget\\packages\\jquery\\1.12.4\\jquery.1.12.4.nupkg.sha512",
+    "C:\\Users\\ankit_2\\.nuget\\packages\\jquery.ui.combined\\1.12.1\\jquery.ui.combined.1.12.1.nupkg.sha512",
     "C:\\Users\\ankit_2\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\ankit_2\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\ankit_2\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

@@ -21,31 +21,33 @@ namespace PartTracking.Mvc.Controllers
         private readonly ILogger<TrackingController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public List<SelectListItem> PartMasterSelectList{ get; set; }
+        public List<SelectListItem> PartMasterSelectList { get; set; }
 
         public TrackingController(ILogger<TrackingController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-
+      
         public IActionResult Index()
         {
             PartMasterSelectList = _unitOfWork.PartMasters.GetPartMasterSelectList();
             ViewBag.Parts = PartMasterSelectList;
+            ViewBag.Years = _unitOfWork.PartTrackingService.GetYears();
+            ViewBag.Months = _unitOfWork.PartTrackingService.GetMonths();
             return View();
         }
 
         [HttpGet]
-        public IActionResult GetWarehouseOrdersByPart(int Id)
+        public IActionResult GetWarehouseOrdersByPart(int Id, string year, string month)
         {
             PartTrackingData partTrackingData = new PartTrackingData();
             try
-            {                
-                partTrackingData = _unitOfWork.PartTrackingService.GetPartOrdersData(Id);
+            {
+                partTrackingData = _unitOfWork.PartTrackingService.GetPartOrdersData(Id, year,month);
                 return PartialView("_partOrders", partTrackingData);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["Exception"] = "Exception!";
                 return PartialView("_partOrders", partTrackingData);

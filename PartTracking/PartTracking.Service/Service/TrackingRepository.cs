@@ -9,6 +9,9 @@ using System.Data.Common;
 using PartTracking.Context.Models.Models;
 using PartTracking.Service.Repository;
 using PartTracking.Context.Models.DTO;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
+
 
 namespace PartTracking.Service.Service
 {
@@ -18,21 +21,24 @@ namespace PartTracking.Service.Service
         {
         }
 
-        public PartTrackingData GetPartOrdersData(int partMasterId)
+        public PartTrackingData GetPartOrdersData(int partMasterId, string year, string month)
         {
             PartTrackingData data = new PartTrackingData();
             data.Orders = new List<OrderTrackingData>();
 
-            var part_ = _context.PartMaster.Include(x=>x.OrderMaster).Where(x => x.PartMasterId == partMasterId).FirstOrDefault();
+            var part_ = _context.PartMaster.Include(x=>x.OrderMaster)
+                    .Where(x => x.PartMasterId == partMasterId).FirstOrDefault();
           
             if (part_ != null)
             {
                 data.PartMasterId = part_.PartMasterId;
                 data.Part = part_.PartName + " [ " + part_.PartCode + " ] ";
                 data.Quantity = (int)(part_.Quantity == null ? 0 : part_.Quantity);
-                
-                var orders_ = part_.OrderMaster;
-                if(orders_!=null && orders_.Count() > 0)
+
+                // var orders_ = part_.OrderMaster;
+                var orders_ = part_.OrderMaster
+                                    .Where(x => x.OrderDate.Year == Int32.Parse(year) && x.OrderDate.Month == Int32.Parse(month));
+                if (orders_!=null && orders_.Count() > 0)
                 {
                     foreach(var order_ in orders_)
                     {
@@ -80,5 +86,39 @@ namespace PartTracking.Service.Service
             }
             return data;
         }
+
+        public List<SelectListItem> GetYears()
+        {
+            List<int> distinctYears = _context.OrderMaster.Select(x => x.OrderDate.Year).Distinct().ToList();
+           
+            List<SelectListItem> years = new List<SelectListItem>();
+
+            foreach (var year in distinctYears)
+            {
+                years.Add(new SelectListItem()
+                {
+                     Value = year+"",
+                      Text = year+""
+                });
+            }
+            return years;
+        }
+        public List<SelectListItem> GetMonths()
+        {
+            List<SelectListItem> months = new List<SelectListItem>();
+
+            for (int i = 0; i < 12; i++)
+            {
+                Console.WriteLine(CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[i]);
+                months.Add(new SelectListItem()
+                {
+                     Text = CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[i],
+                     Value = (i+1)+""
+                });
+            }
+
+            return months;
+        }
+
     }
 }
