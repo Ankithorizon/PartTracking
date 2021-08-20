@@ -1,12 +1,20 @@
 ﻿@model PartTracking.Context.Models.DTO.PartTrackingData
 
 <style>
-    .data {
+    .dataImp {
         color: red;
         font-size: x-large;
     }
 
+    .data {
+        color: blue;
+        font-size: large;
+    }
+
     .label {
+        font-size: large;
+    }
+    .labelImp {
         font-size: x-large;
     }
 </style>
@@ -24,10 +32,10 @@ else
         <h4>Part - Data</h4>
         <hr />
         <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.PartMasterId)
+            <dt class="col-sm-2 label">
+                Part #
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-10 data">
                 @Html.DisplayFor(model => model.PartMasterId)
             </dd>
             <dt class="col-sm-2 label">
@@ -36,10 +44,10 @@ else
             <dd class="col-sm-10 data">
                 @Html.DisplayFor(model => model.Part)
             </dd>
-            <dt class="col-sm-2 label">
+            <dt class="col-sm-2 labelImp">
                 QTY
             </dt>
-            <dd class="col-sm-10 data">
+            <dd class="col-sm-10 dataImp">
                 @Html.DisplayFor(model => model.Quantity)  @@WareHouse
             </dd>
         </dl>
@@ -81,7 +89,7 @@ else
                                 @item.WorkOrderQuantity
                             </td>
                             <td>
-                                <a class="btn btn-primary receivingDetails"
+                                <a class="btn btn-primary pullingDetails"
                                    data-id="@item.WorkOrderId"
                                    href="javascript:void(0)">Track Part Pulling!</a>
                             </td>
@@ -99,11 +107,41 @@ else
             <p></p>
         }
     </div>
+
+    <!-- part-pulling partial view -->
+    <div id="partPulling">
+    </div>
 }
 <p></p>
 
 
 
+
 <script type="text/javascript">
 
+    $(".pullingDetails").click(function () {
+
+        var obj = {};
+        obj.Id = $(this).attr('data-id');
+
+        $.ajax({
+            type: "Get", //Method type
+            url: "/Tracking/GetPullingDataByWO?Id=" + obj.Id,
+            data: JSON.stringify(obj.Id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                console.log(response);
+                $('#partPulling').html(response);
+            },
+            failure: function (response) {
+
+            },
+            error: function (response) {
+
+            }
+        });
+    });
+
 </script>
+

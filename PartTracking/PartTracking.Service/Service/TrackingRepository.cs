@@ -166,5 +166,35 @@ namespace PartTracking.Service.Service
             }
             return data;
         }
+
+        public WOTrackingData GetPullingData(int workOrderId)
+        {
+            WOTrackingData data = new WOTrackingData();
+            data.PullingData = new List<PullingTrackingData>();
+
+            var _wo = _context.WorkOrder.Where(x => x.WorkOrderId == workOrderId).FirstOrDefault();
+            if (_wo != null)
+            {
+                data.WorkOrderId = _wo.WorkOrderId;
+                data.WOId = _wo.Woid;
+                data.WorkOrderQuantity = _wo.PartQuantityRequired;
+                data.PulledQuantity = 0;
+                var _pulling = _context.PartWorkOrder.Where(x => x.WorkOrderId == _wo.WorkOrderId);
+                if (_pulling != null && _pulling.Count() > 0)
+                {
+                    foreach (var _pullingData in _pulling)
+                    {
+                        data.PullingData.Add(new PullingTrackingData()
+                        {
+                             PartWorkOrderId = _pullingData.PartWorkOrderId,
+                              PullingDate = (DateTime) _pullingData.PulledDate,
+                               PullingQuantity = _pullingData.PartQuantityPulled                           
+                        });
+                        data.PulledQuantity += _pullingData.PartQuantityPulled;
+                    }
+                }
+            }
+            return data;
+        }
     }
 }

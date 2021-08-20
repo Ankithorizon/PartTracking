@@ -90,5 +90,20 @@ namespace PartTracking.Mvc.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetPullingDataByWO(int Id)
+        {
+            WOTrackingData woTrackingData = new WOTrackingData();
+            try
+            {
+                woTrackingData = _unitOfWork.PartTrackingService.GetPullingData(Id);
+                return PartialView("_partPulling", woTrackingData);
+            }
+            catch (Exception ex)
+            {
+                TempData["Exception"] = "Exception!";
+                return PartialView("_partPulling", woTrackingData);
+            }
+        }
     }
 }
