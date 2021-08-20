@@ -155,3 +155,4 @@ C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Tracking\_partOrders.cshtml.g.cs
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Tracking\_partReceiving.cshtml.g.cs
 C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\PartTracking.Mvc.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ankit_2\source\repos\PartTracking\PartTracking.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Tracking\_workOrders.cshtml.g.cs

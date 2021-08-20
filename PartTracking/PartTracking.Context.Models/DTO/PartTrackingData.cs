@@ -10,5 +10,6 @@ namespace PartTracking.Context.Models.DTO
         public string Part { get; set; }
         public int Quantity { get; set; }
         public List<OrderTrackingData> Orders { get; set; }
+        public List<WOTrackingData> WorkOrders { get; set; }
     }
 }

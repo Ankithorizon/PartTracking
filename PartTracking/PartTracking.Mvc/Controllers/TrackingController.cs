@@ -73,5 +73,22 @@ namespace PartTracking.Mvc.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetWOData(int Id)
+        {
+            PartTrackingData partTrackingData = new PartTrackingData();
+            partTrackingData.WorkOrders = new List<WOTrackingData>();
+            try
+            {
+                partTrackingData = _unitOfWork.PartTrackingService.GetWOData(Id);
+                return PartialView("_workOrders", partTrackingData);
+            }
+            catch (Exception ex)
+            {
+                TempData["Exception"] = "Exception!";
+                return PartialView("_workOrders", partTrackingData);
+            }
+        }
+
     }
 }

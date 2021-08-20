@@ -6,5 +6,8 @@ namespace PartTracking.Context.Models.DTO
 {
     public class WOTrackingData
     {
+        public int WOId { get; set; }
+        public int WorkOrderId { get; set; }
+        public int  WorkOrderQuantity { get; set; }
     }
 }

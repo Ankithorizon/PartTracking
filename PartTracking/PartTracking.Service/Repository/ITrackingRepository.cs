@@ -13,5 +13,7 @@ namespace PartTracking.Service.Repository
         OrderTrackingData GetPartReceivingData(int orderMasterId);
         List<SelectListItem> GetYears();
         List<SelectListItem> GetMonths();
+        PartTrackingData GetWOData(int partMasterId);
+
     }
 }

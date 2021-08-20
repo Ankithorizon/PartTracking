@@ -134,5 +134,37 @@ namespace PartTracking.Service.Service
             return months;
         }
 
+        public PartTrackingData GetWOData(int partMasterId)
+        {
+            PartTrackingData data = new PartTrackingData();
+            data.WorkOrders = new List<WOTrackingData>();
+
+            var part_ = _context.PartMaster.Include(x => x.OrderMaster)
+                 .Where(x => x.PartMasterId == partMasterId).FirstOrDefault();
+
+            if (part_ != null)
+            {
+                data.PartMasterId = part_.PartMasterId;
+                data.Part = part_.PartName + " [ " + part_.PartCode + " ] ";
+                data.Quantity = (int)(part_.Quantity == null ? 0 : part_.Quantity);
+
+                var wos_ = _context.WorkOrder
+                                .Where(x => x.PartMasterId == partMasterId);
+              
+                if (wos_ != null && wos_.Count() > 0)
+                {
+                    foreach (var wo in wos_)
+                    {
+                        data.WorkOrders.Add(new WOTrackingData()
+                        {
+                             WOId = wo.Woid,
+                              WorkOrderId = wo.WorkOrderId,
+                               WorkOrderQuantity = wo.PartQuantityRequired
+                        });
+                    }
+                }
+            }
+            return data;
+        }
     }
 }

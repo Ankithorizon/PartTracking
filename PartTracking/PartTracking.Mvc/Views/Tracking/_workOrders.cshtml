@@ -1,0 +1,109 @@
+﻿@model PartTracking.Context.Models.DTO.PartTrackingData
+
+<style>
+    .data {
+        color: red;
+        font-size: x-large;
+    }
+
+    .label {
+        font-size: x-large;
+    }
+</style>
+
+@if (TempData["Exception"] != null)
+{
+    <div class="container response">
+        <h3>Error : @TempData["Exception"]</h3>
+    </div>
+}
+else
+{
+    <!-- part data-->
+    <div>
+        <h4>Part - Data</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PartMasterId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PartMasterId)
+            </dd>
+            <dt class="col-sm-2 label">
+                @Html.DisplayNameFor(model => model.Part)
+            </dt>
+            <dd class="col-sm-10 data">
+                @Html.DisplayFor(model => model.Part)
+            </dd>
+            <dt class="col-sm-2 label">
+                QTY
+            </dt>
+            <dd class="col-sm-10 data">
+                @Html.DisplayFor(model => model.Quantity)  @@WareHouse
+            </dd>
+        </dl>
+    </div>
+
+    <!-- part - workorders data -->
+    <div>
+        <h4>WorkOrders - Data</h4>
+        <hr />
+
+        @if (Model.WorkOrders.Count() > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            WOId #
+                        </th>
+                        <th>
+                            WorkOrder #
+                        </th>
+                        <th>
+                            WO QTY
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.WorkOrders)
+                    {
+                        <tr>
+                            <td>
+                                @item.WOId
+                            </td>
+                            <td>
+                                @item.WorkOrderId
+                            </td>
+                            <td>
+                                @item.WorkOrderQuantity
+                            </td>
+                            <td>
+                                <a class="btn btn-primary receivingDetails"
+                                   data-id="@item.WorkOrderId"
+                                   href="javascript:void(0)">Track Part Pulling!</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p></p>
+            <div class="container" style="color:red; font-size:xx-large;">
+                Work Orders NOT Found!
+            </div>
+            <p></p>
+        }
+    </div>
+}
+<p></p>
+
+
+
+<script type="text/javascript">
+
+</script>
