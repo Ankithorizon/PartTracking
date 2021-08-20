@@ -23,9 +23,14 @@ System Process
 	
 - { Warehouse-dept -> order for Part (refcode)}
 	- [ create order with (status Confirmed) and generates (refcode) for future receiving of Part]
+	- [ Edit - Order (Confirmed)]
+	- [ View - Order (Confirmed/Received_WIP/Received)
+	- [ Search - Order (Confirmed/Received_WIP/Received)
 		 
 		 
 - { Receiving-dept -> receive Part (refcode)}
+	- [ View - Receiving Details - Warehouse Order Details - Part Details for,,, Received_WIP/Received - Orders]
+	- [ Search - Order (Received_WIP/Received)]
 	- [ update order (status from Confirmed) to 
 		(Received_WIP(if received by installment quantity)) /
 		(Received(if received by fully quantity))]
