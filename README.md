@@ -31,7 +31,7 @@ System Process
 - { Receiving-dept -> receive Part (refcode)}
 	- [ View - Receiving Details - Warehouse Order Details - Part Details for,,, Received_WIP/Received - Orders]
 	- [ Search - Order (Received_WIP/Received)]
-	- [ update order (status from Confirmed) to 
+	- [ update Order (status from Confirmed) to 
 		(Received_WIP(if received by installment quantity)) /
 		(Received(if received by fully quantity))]
 	- [ update quantity @Warehouse-Part ]
