@@ -1,3 +1,13 @@
+Technology-->
+MVC .Net Core - 3.1
+Generic Repository, Unit Of Work
+EF Transaction
+Sql Server, T-Sql, Stored Procedures with Transaction
+Razor View, Partial View
+JQuery, Html, CSS, Bootstrap
+
+
+
 System Process-->
 
 -> { Engineering-dept -> Part create/edit/view}
