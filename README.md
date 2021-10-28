@@ -89,8 +89,7 @@ System Process
 
 ## Warehouse-Order-Add-Confirmed->
 
-![WarehouseOrderAddConfirmed](https://user-images.githubusercontent.com/26190114/130300713-b710cd9b-6ff0-4d23-a14e-b78e8efb4433.PNG)
-
+![Warehouse-OrderStatus-Confirmed](https://user-images.githubusercontent.com/26190114/139322254-f45d858b-9c6c-4303-a797-d24133d0e9fb.PNG)
 
 
 
@@ -131,14 +130,14 @@ System Process
 
 ## ReceivingPart-Receive-By-Installment (Partially_WIP)->
 
-![ReceivingPart_Partially_WIP](https://user-images.githubusercontent.com/26190114/130300838-86dd3c33-bd90-4d17-b06e-c2c48eff4e8f.PNG)
+![Receive-Partially](https://user-images.githubusercontent.com/26190114/139322349-b4cf5748-db53-4411-960b-d549b3baac80.PNG)
 
 
 
 
 ## ReceivingPart-Receive-By-Fully (Fully_Received)->
 
-![ReceivingPart_Fully_Received](https://user-images.githubusercontent.com/26190114/130300845-5e4af93b-8625-4955-906b-cbb03031df2c.PNG)
+![Receive-Fully](https://user-images.githubusercontent.com/26190114/139322423-8bd8363b-3679-41dd-9836-393b4f95c0c0.PNG)
 
 
 
@@ -260,8 +259,7 @@ System Process
 
 ## Engineering-Part-Add [Duplicate_PartCode]->
 
-![EngineeringPartAdd_Duplicate_PartCode](https://user-images.githubusercontent.com/26190114/130301062-298f9af5-b7e1-45bd-960f-9127f87b185a.PNG)
-
+![Duplicate_PartCode](https://user-images.githubusercontent.com/26190114/139322029-e09a2262-f79f-46bb-8260-a69eb5e73735.PNG)
 
 
 
