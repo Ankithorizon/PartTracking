@@ -133,7 +133,7 @@ namespace PartTracking.Mvc.Controllers
             var found = _unitOfWork.PartMasters.Find(x => x.PartCode == PartCode);
             if (found != null && found.Count()>0)
             {
-                return Json(data: PartCode + "is already used!!");
+                return Json(data: "[ " + PartCode + " ] is already used!!");
             }
             else
             {
@@ -260,8 +260,8 @@ namespace PartTracking.Mvc.Controllers
 
             var found = _unitOfWork.PartMasters.Find(x => x.PartCode == PartCode);
             if (found != null && found.Count() > 0)
-            {
-                return Json(data: PartCode + "is already used!!");
+            {                
+                return Json(data: "[ " + PartCode + " ] is already used!!");
             }
             else
             {
