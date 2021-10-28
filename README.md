@@ -74,7 +74,7 @@ Technology
 
 ## Home->
 
-![Home](https://user-images.githubusercontent.com/26190114/130300441-c3d5bad1-852c-4cbb-aa3b-275b2f4fc82e.PNG)
+![home](https://user-images.githubusercontent.com/26190114/139342676-6ae69bbc-6715-4b40-95a4-624a6e146081.PNG)
 
 
 ## Warehouse-Home->
