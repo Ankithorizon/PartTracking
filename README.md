@@ -15,6 +15,8 @@ Technology
 - JQuery, Html, CSS, Bootstrap
 
 
+
+
 ---> exceptions / transaction handling
 
 	  - Model validations are handled on Server side - MVC - Controller
