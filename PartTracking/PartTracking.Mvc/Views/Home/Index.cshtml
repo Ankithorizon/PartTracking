@@ -1,17 +1,38 @@
 ﻿@{
-    ViewData["Title"] = "Home - Index";
+    ViewData["Title"] = "Part-Tracking-Service";
 }
 
+<style>
+
+    .homePageHeader {
+        text-align: center;
+        vertical-align: middle;
+        color: blue;
+        background-color: lightyellow;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border: 2px solid red;
+        border-radius: 20px;
+    }
+</style>
 
 <div class="container">
-    <div class="jumbotron">
-        <h1>Part Tracking Service - Home</h1>
+    <div>
+        <div class="homePageHeader">
+            <h3>Part-Tracking-Service</h3>
+            <h5>Technology : .Net Core MVC / EF Core / Razor View / SQL Server / Stored-Procedures</h5>
+        </div>
     </div>
+    <hr />
+    <p></p>
+
+
     <h3>
         <ul>
             <li>Engineering Department can Create/Edit/View/Search (New) Part</li>
             <br />
-            <li>Warehouse can Create Order(Generate Request) for Parts
+            <li>
+                Warehouse can Create Order(Generate Request) for Parts
                 <ul>
                     <li>Edit - Order (Confirmed)</li>
                     <li>View - Order (Confirmed/Received_WIP/Received)</li>
@@ -23,13 +44,16 @@
                 Receiving can
                 <ul>
                     <li>Receive Parts in Complete Quantity or in Installment Quantity</li>
-                    <li>View - Receiving Details - Warehouse Order Details - Part Details
-                        for,,, Received_WIP/Received - Orders</li>
+                    <li>
+                        View - Receiving Details - Warehouse Order Details - Part Details
+                        for,,, Received_WIP/Received - Orders
+                    </li>
                     <li>Search - Order (Received_WIP/Received)</li>
                 </ul>
             </li>
             <br />
-            <li>Production&gt;WorkOrder
+            <li>
+                Production&gt;WorkOrder
                 <ul>
                     <li>Can Not Pull More Than Parts Required For WorkOrder#</li>
                     <li>Can Not Pull If 0 Parts Available at Warehouse</li>
