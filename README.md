@@ -15,45 +15,52 @@ Technology
 - JQuery, Html, CSS, Bootstrap
 
 
+---> exceptions / transaction handling
 
-System Process
---------------
+	  - Model validations are handled on Server side - MVC - Controller
+	  - all Server side exceptions are handled on MVC Controllers / C# Services / Sql Stored-Procedures
+	  - all transactions are handled on Sql Stored-Procedures
+    
+---> [Engineering Department]
 
-- { Engineering-dept -> Part create/edit/view}
+	- Create/Edit/View/Search Part
 	
-- { Warehouse-dept -> order for Part (refcode)}
-	- [ create order with (status Confirmed) and generates (refcode) for future receiving of Part]
-	- [ Edit - Order (Confirmed)]
-	- [ View - Order (Confirmed/Received_WIP/Received)
-	- [ Search - Order (Confirmed/Received_WIP/Received)
-		 
-		 
-- { Receiving-dept -> receive Part (refcode)}
-	- [ View - Receiving Details - Warehouse Order Details - Part Details for,,, Received_WIP/Received - Orders]
-	- [ Search - Order (Received_WIP/Received)]
-	- [ update Order (status from Confirmed) to 
-		(Received_WIP(if received by installment quantity)) /
-		(Received(if received by fully quantity))]
-	- [ update quantity @Warehouse-Part ]
-	- [ keeps track by receiving-quantity and receiving-date 
-		with reference to (refcode)  ]
+	
+---> [Warehouse]
 
-- { Production-dept -> WorkOrder}
-	- [ WorkOrder connects with more than 1 Parts]
-	- [ WorkOrder can not pull Parts more than required quantity]
-	- [ WorkOrder can pull Parts from Warehouse by fully quantity or by installment quantity]
-	- [ WorkOrder@Pulling-Parts -> update quantity @Warehouse-Part]
-	- [ WorkOrder@Pulling-Parts keep track by pulling-quantity and pulling-date ]
-		 
-- {Tracking-Part}
-	- [ Track Warehouse-Orders versus Part]
-		- [ Track Receiving-Orders versus Part]
-	- [ Track WorkOrders versus Part]
-		- [ Track Pulling of Parts versus Part]
+	- Create Order(Generate Request With Order-Status Confirmed) for Parts
+	- Edit - Order (Confirmed)
+	- View - Order (Confirmed/Received_WIP/Received)
+	- Search - Order (Confirmed/Received_WIP/Received) 
 
 
+---> [Receiving]
 
+	- Receive Parts in Fully Quantity or in Installment Quantity
+	- View - Receiving Details - Warehouse Order Details - Part Details for,,, Received_WIP/Received - Orders
+	- Search - Order (Received_WIP/Received)
+	- Update Order (Status From Confirmed to Received_WIP - If Received By Installment Quantity)
+	- Update Order (Status From Confirmed to Received - If Received By Fully Quantity)
+	- Auto Update of Quantity for Part @Warehouse
+	
+	
+---> [Production --> WorkOrder]
 
+	- WorkOrder Connects With More Than 1 Part
+	- WorkOrder Can Not Pull More Than Parts Required For WorkOrder#
+	- WorkOrder Can Not Pull If 0 Parts Available at Warehouse
+	- WorkOrder Can Pull Parts in Complete Quantity or in Installment Quantity
+	- WorkOrder@Pulling-Parts --> Update Quantity For Part @WareHouse
+	- Search - WorkOrder
+	
+	
+---> [Tracking [Warehouse Orders / Work Orders]]
+
+	- Track Warehouse-Orders versus Part
+	- Track Receiving-Orders versus Part
+	- Track WorkOrders versus Part
+	- Track Pulling of Parts versus Part
+    
 
 # Database
 
