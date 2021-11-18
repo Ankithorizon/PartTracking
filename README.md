@@ -19,18 +19,18 @@ Technology
 
 
 
----> exceptions / transaction handling
+### ---> exceptions / transaction handling
 
 	  - Model validations are handled on Server side - MVC - Controller
 	  - all Server side exceptions are handled on MVC Controllers / C# Services / Sql Stored-Procedures
 	  - all transactions are handled on Sql Stored-Procedures
     
----> [Engineering Department]
+### ---> [Engineering Department]
 
 	- Create/Edit/View/Search Part
 	
 	
----> [Warehouse]
+### ---> [Warehouse]
 
 	- Create Order(Generate Request With Order-Status Confirmed) for Parts
 	- Edit - Order (Confirmed)
@@ -38,7 +38,7 @@ Technology
 	- Search - Order (Confirmed/Received_WIP/Received) 
 
 
----> [Receiving]
+### ---> [Receiving]
 
 	- Receive Parts in Fully Quantity or in Installment Quantity
 	- View - Receiving Details - Warehouse Order Details - Part Details for,,, Received_WIP/Received - Orders
@@ -48,7 +48,7 @@ Technology
 	- Auto Update of Quantity for Part @Warehouse
 	
 	
----> [Production --> WorkOrder]
+### ---> [Production --> WorkOrder]
 
 	- WorkOrder Connects With More Than 1 Part
 	- WorkOrder Can Not Pull More Than Parts Required For WorkOrder#
@@ -58,7 +58,7 @@ Technology
 	- Search - WorkOrder
 	
 	
----> [Tracking [Warehouse Orders / Work Orders]]
+### ---> [Tracking [Warehouse Orders / Work Orders]]
 
 	- Track Warehouse-Orders versus Part
 	- Track Receiving-Orders versus Part
